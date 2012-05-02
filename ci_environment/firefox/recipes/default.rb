@@ -22,7 +22,7 @@
 # THE SOFTWARE.
 
 list = case node.platform
-when "ubuntu", "debian" then
+when "ubuntu", "debian", "centos", "redhat", "fedora" then
   %w(firefox)
 end # case
 

@@ -1,10 +1,8 @@
 #
-# Cookbook Name:: mongodb
-# Recipe:: default
+# Cookbook Name:: yum
+# Resource:: key
 #
-# Author:: Gerhard Lazu (<gerhard.lazu@papercavalier.com>)
-#
-# Copyright 2010, Paper Cavalier, LLC
+# Copyright 2011, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +17,7 @@
 # limitations under the License.
 #
 
-case node[:platform]
-when "ubuntu", "debian"
-  include_recipe "mongodb::apt"
-when "fedora", "redhat", "centos"
-  # last two need EPEL
-  package "mongodb-server"
-  package "mongodb"
-end
+actions :add, :remove
 
-include_recipe "mongodb::server"
+attribute :key, :kind_of => String, :name_attribute => true
+attribute :url, :kind_of => String, :default => nil

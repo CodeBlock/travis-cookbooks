@@ -61,3 +61,15 @@ cookbook_file "#{node.travis_build_environment.home}/.rvmrc" do
 
   source "dot_rvmrc.sh"
 end
+
+# Fedora 16 (and 15) has a hard time building RVMified ruby18.
+# Later on we will want to make this (and :fedora_arguments from multi.rb)
+# check and make sure that we are on <17. -CodeBlock.
+if node[:platform] == 'fedora'
+  cookbook_file "#{node.travis_build_environment.home}/.stdout-rouge-fix.patch" do
+    owner node.travis_build_environment.user
+    group node.travis_build_environment.group
+    mode  0755
+    source "stdout-rouge-fix.patch"
+  end
+end

@@ -20,7 +20,7 @@
 include_recipe "java"
 
 case node[:platform]
-when "redhat","centos","fedora"
+when "redhat","centos"
   
   package "yum-priorities" do
     action :install
@@ -55,4 +55,6 @@ when "redhat","centos","fedora"
   package "jpackage-utils" do
     action :install
   end
+when "fedora"
+  package "jpackage-utils"
 end

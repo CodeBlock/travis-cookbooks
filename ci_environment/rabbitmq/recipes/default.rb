@@ -18,14 +18,17 @@
 # limitations under the License.
 #
 
-# use the RabbitMQ repository instead of Ubuntu or Debian's
-# because there are very useful features in the newer versions
-apt_repository "rabbitmq" do
-  uri "http://www.rabbitmq.com/debian/"
-  distribution "testing"
-  components ["main"]
-  key "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
-  action :add
+case node[:platform]
+when "ubuntu", "debian"
+  # use the RabbitMQ repository instead of Ubuntu or Debian's
+  # because there are very useful features in the newer versions
+  apt_repository "rabbitmq" do
+    uri "http://www.rabbitmq.com/debian/"
+    distribution "testing"
+    components ["main"]
+    key "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
+    action :add
+  end
 end
 
 # rabbitmq-server is not well-behaved as far as managed services goes

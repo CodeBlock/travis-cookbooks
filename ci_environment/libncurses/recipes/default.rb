@@ -21,11 +21,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-package "libncursesw5-dev"
-
 case node['platform']
 when "ubuntu","debian"
-  %w{libncurses5-dev}.each do |pkg|
-    package(pkg) { action :install }
-  end # each
+  package "libncurses5-dev"
+  package "libncursesw5-dev"
+when "fedora", "redhat", "centos"
+  package "ncurses-devel"
 end # case

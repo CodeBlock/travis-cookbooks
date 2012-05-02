@@ -23,10 +23,10 @@
 
 # this must be in place: unless apt index is updated, xulrunner dependency will fail
 # to install thus failing couchdb installation or even the entire Chef run. MK.
-include_recipe "apt"
 
 list = case node.platform
-when "ubuntu", "debian" then
+when "ubuntu", "debian", "centos", "fedora", "redhat" then
+  # Will need EPEL for CentOS and RHEL
   %w(couchdb)
 end # case
 

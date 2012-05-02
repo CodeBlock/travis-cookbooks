@@ -40,6 +40,15 @@ when "debian", "ubuntu"
       provider Chef::Provider::Package::Dpkg
     end
   end # each
+when "redhat", "centos", "fedora"
+  yum_repository "typesafe" do
+    name "Typesafe Rpm Repository"
+    url "http://rpm.typesafe.com/"
+    action :add
+  end
+  package "typesafe-stack" do
+    action :install
+  end
 end # case
 
 

@@ -5,6 +5,5 @@ description       "Installs php-build and phpenv for multiple PHP versions manag
 version           "1.0.0"
 
 depends "build-essential"
-depends "apt"
 depends "php-build"
 depends "phpenv"

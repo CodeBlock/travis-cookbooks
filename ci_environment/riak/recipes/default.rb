@@ -58,7 +58,7 @@ when "debian", "ubuntu"
   ruby_block "switch to eleveldb backend" do
     block do
       fe = Chef::Util::FileEdit.new("/etc/riak/app.config")
-      fe.search_file_replace_line(/{storage_backend, /, "{storage_backend, riak_kv_eleveldb_backend},")
+      fe.search_file_replace_line(/\{storage_backend, /, "{storage_backend, riak_kv_eleveldb_backend},")
       fe.write_file
     end
   end

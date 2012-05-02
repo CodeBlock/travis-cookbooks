@@ -7,5 +7,4 @@ version "1.0"
 recipe "perlbrew", "Install system-wide Perlbrew"
 recipe "perlbrew::multi", "Install a Perl implementation based on attributes"
 
-depends "apt"
 depends "build-essential"

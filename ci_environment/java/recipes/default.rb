@@ -39,19 +39,9 @@ when "debian"
   # update-java-alternatives doesn't work with only sun java installed
   node.set['java']['java_home'] = "/usr/lib/jvm/java-6-sun"
 when "centos", "redhat", "fedora"
-  pkgs.each do |pkg|
-    if node['java'].attribute?('rpm_url')
-      remote_file "#{Chef::Config[:file_cache_path]}/#{pkg}" do
-        source "#{node['java']['rpm_url']}/#{pkg}"
-        checksum node['java']['rpm_checksum']
-        mode "0644"
-      end
-    else
-      cookbook_file "#{Chef::Config[:file_cache_path]}/#{pkg}" do
-        source pkg
-        mode "0644"
-        action :create_if_missing
-      end
+  ["java-1.6.0-openjdk","java-1.6.0-openjdk-devel"].each do |pkg|
+    package pkg do
+      action :install
     end
   end
 else

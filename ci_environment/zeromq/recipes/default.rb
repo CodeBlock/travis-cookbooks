@@ -42,4 +42,9 @@ when "debian", "ubuntu"
       provider Chef::Provider::Package::Dpkg
     end
   end # each
+when "fedora", "centos", "redhat"
+  # centos/rhel will require EPEL.
+  package "zeromq" do
+    action :install
+  end
 end # case

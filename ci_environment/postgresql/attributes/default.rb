@@ -47,7 +47,7 @@ when "fedora"
                                    end
 
   set[:postgresql][:dir] = "/var/lib/pgsql/data"
-when "redhat","centos"
+when "redhat", "centos", "fedora"
   default[:postgresql][:version] = "8.4"
   set[:postgresql][:dir] = "/var/lib/pgsql/data"
 when "suse"

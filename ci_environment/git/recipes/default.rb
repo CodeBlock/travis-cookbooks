@@ -63,4 +63,6 @@ when "debian", "ubuntu"
       not_if "which git"
     end
   end # each
+when "fedora", "redhat", "centos"
+  package "git"
 end # case

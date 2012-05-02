@@ -20,6 +20,5 @@ recipe "rvm::ruby_192", "Helper recipe to install ruby 1.9.2"
 recipe "rvm::ruby_187", "Helper recipe to install ruby 1.8.7"
 recipe "rvm::ree", "Helper recipe to install ruby enterprise edition"
 
-depends "apt"
 depends "build-essential"
 depends "git"

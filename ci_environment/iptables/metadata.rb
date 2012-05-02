@@ -5,6 +5,6 @@ description       "Sets up iptables to use a script to maintain rules"
 version           "0.9.3"
 
 recipe "iptables", "Installs iptables and sets up .d style config directory of iptables rules"
-%w{ redhat centos debian ubuntu}.each do |os|
+%w{ redhat centos debian ubuntu fedora }.each do |os|
   supports os
 end

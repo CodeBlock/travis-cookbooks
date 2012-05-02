@@ -5,9 +5,8 @@ description       "Installs and configures RabbitMQ server"
 version           "1.2.0"
 recipe            "rabbitmq", "Install and configure RabbitMQ"
 recipe            "rabbitmq::cluster", "Set up RabbitMQ clustering."
-depends           "apt", "> 1.1"
 
-%w{ubuntu debian}.each do |os|
+%w{ubuntu debian fedora redhat centos}.each do |os|
   supports os
 end
 

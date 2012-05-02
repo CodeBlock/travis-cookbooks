@@ -59,12 +59,22 @@ template "/etc/security/limits.conf" do
   source "etc/security/limits.conf.erb"
 end
 
-template "/etc/apt/apt.conf.d/60assumeyes" do
-  owner "root"
-  group "root"
-  mode 0644
+case node[:platform]
+when "ubuntu", "debian"
+  template "/etc/apt/apt.conf.d/60assumeyes" do
+    owner "root"
+    group "root"
+    mode 0644
 
-  source "etc/apt/assumeyes.erb"
+    source "etc/apt/assumeyes.erb"
+  end
+
+  # Make sure we don't have obscure issues with SSL certificates.
+  # See https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/873517
+  # and http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=623671. MK.
+  execute "/usr/sbin/update-ca-certificates -f" do
+    user "root"
+  end
 end
 
 include_recipe "iptables"
@@ -88,9 +98,3 @@ execute "rm /etc/update-motd.d/*" do
   ignore_failure true
 end
 
-# Make sure we don't have obscure issues with SSL certificates.
-# See https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/873517
-# and http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=623671. MK.
-execute "/usr/sbin/update-ca-certificates -f" do
-  user "root"
-end

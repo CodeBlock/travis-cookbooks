@@ -1,4 +1,3 @@
-include_recipe "apt"
 include_recipe "git"
 
 include_recipe "mysql::client"
@@ -31,6 +30,10 @@ when "ubuntu", "debian"
     link "/usr/lib/libstdc++.so.6" do
       to "/usr/lib/i386-linux-gnu//usr/lib/libstdc++.so.6"
     end
+  end
+when "fedora", "redhat", "centos"
+    %w{bzip2-libs libc-client libcurl-devel freetype-devel gmp-devel libmcrypt-devel libpng-devel t1lib-devel libmhash-devel expat-devel libicu-devel libtidy-devel re2c lemon}.each do |pkg|
+    package(pkg) { action :install }
   end
 end
 

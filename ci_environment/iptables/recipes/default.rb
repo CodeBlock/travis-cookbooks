@@ -20,7 +20,7 @@
 package "iptables"
 
 iptables_ruleset_path = case node[:platform]
-                     when "redhat", "centos"
+                     when "redhat", "centos", "fedora"
                        "/etc/sysconfig/iptables"
                      when "ubuntu", "debian"
                        "/etc/iptables/general"
@@ -41,8 +41,11 @@ cookbook_file iptables_ruleset_path do
   notifies :run, resources(:execute => "restore iptables"), :delayed
 end
 
-template "/etc/network/if-pre-up.d/iptables_load" do
-  source "iptables_load.erb"
-  mode 0755
-  variables :iptables_ruleset_path => iptables_ruleset_path
+case node[:platform]
+when "ubuntu", "debian"
+  template "/etc/network/if-pre-up.d/iptables_load" do
+    source "iptables_load.erb"
+    mode 0755
+    variables :iptables_ruleset_path => iptables_ruleset_path
+  end
 end

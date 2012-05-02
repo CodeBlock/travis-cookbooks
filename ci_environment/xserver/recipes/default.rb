@@ -24,6 +24,8 @@
 list = case node.platform
 when "ubuntu", "debian" then
   %w(xserver-xorg-core xvfb)
+when "redhat", "centos", "fedora"
+  %w(xorg-x11-server-Xorg xorg-x11-server-Xvfb)
 end # case
 
 list.each { |pkg| package(pkg) { action :install } }
